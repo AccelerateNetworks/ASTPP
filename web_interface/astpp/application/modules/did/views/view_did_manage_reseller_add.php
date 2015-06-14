@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/js/validate.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>/js/validate.js"></script>
 
 <script type="text/javascript">
     $("#submit").click(function(){
@@ -34,7 +34,7 @@
 	  </div>
      </div>
     </div>
-  </div>    
+  </div>
 </section>
 
 
@@ -42,44 +42,44 @@
   <div>
     <section class="slice color-three no-margin">
         <div class="w-section inverse no-padding">
-          
-   
+
+
 
         <form action="<?= base_url() ?><?= isset($did) ? "did/did_reseller_edit/edit" : "did/did_reseller_edit/add" ?>" id="frm_manage_did" method="POST" enctype="multipart/form-data">
 
-            <ul class="padding-15">        
+            <ul class="padding-15">
                 <li class="col-md-8">
                     <label class="col-md-3 no-padding">DID :</label>
                         <input type="text" class="col-md-5 form-control" readonly name="note" value="<?= @$did ?>" />
-                    
-                </li>      
+
+                </li>
                <!-- <li class="col-md-8">
                     <label class="col-md-3 no-padding">Country :</label>
                     <input type="text" class="col-md-5 form-control" name="number" value="<?= @$reseller_didinfo['country'] ?>" />
-                </li>        
+                </li>
 
                  <li class="col-md-8">
-                    <label class="col-md-3 no-padding">Province :</label>     
+                    <label class="col-md-3 no-padding">Province :</label>
                     <input type="text" class="col-md-5 form-control" name="number" value="<?= @$reseller_didinfo['province'] ?>" />
                 </li>
 
                 <li class="col-md-8">
                     <label class="col-md-3 no-padding">City :</label>
                     <input type="text" class="col-md-5 form-control" name="number" value="<?= @$reseller_didinfo['city'] ?>" />
-                </li>  -->     	
+                </li>  -->
                  <!--<li class="col-md-8">
                     <label class="col-md-3 no-padding">Provider :</label>
                     <input type="text" class="col-md-5 form-control" name="number" value="<?= @$reseller_didinfo['provider_id'] ?>" />
                 </li>-->
 
               <!--  <li class="col-md-8">
-                    <label class="col-md-3 no-padding">Account :</label>        
+                    <label class="col-md-3 no-padding">Account :</label>
                     <label class="col-md-5 form-control">
                     if (//$reseller_didinfo['accountid'] == '0') {
                         //echo "";
                     //}
-                   </label>        
-                </li> -->       
+                   </label>
+                </li> -->
                 <?//echo "<pre>";print_r($reseller_didinfo);echo "</pre>";?>
 	      <li class="col-md-8">
                 <label class="col-md-3 no-padding">Call Type</label>
@@ -101,32 +101,32 @@
 		      <label class="col-md-3 no-padding">Disconnection Fee:</label>
 		      <label class="value_bold">&nbsp;<?= @$reseller_didinfo['disconnectionfee'] ?></label>
 		      <input type="text" class="text field" name="disconnectionfee"  size="20"  value="<?= @$reseller_didinfo['disconnectionfee'] ?>" />
-		  </li>   -->  
+		  </li>   -->
                  <li class="col-md-8">
                     <label class="col-md-3 no-padding">Monthly Fee :</label>
                     <input type="text" class="col-md-5 form-control" name="monthlycost" value="<?= @$reseller_didinfo['monthlycost'] ?>" />
-                </li>        
+                </li>
                  <li class="col-md-8">
                     <label class="col-md-3 no-padding">Connection Fee :</label>
                     <input type="text" class="col-md-5 form-control" name="connectcost" value="<?= @$reseller_didinfo['connectcost'] ?>"/>
-                </li>        
+                </li>
                  <li class="col-md-8">
                     <label class="col-md-3 no-padding">Included Seconds :</label>
                     <input type="text" class="col-md-5 form-control" name="includedseconds" value="<?= @$reseller_didinfo['includedseconds'] ?>"/>
-                </li>        
+                </li>
                  <li class="col-md-8">
                     <label class="col-md-3 no-padding">Cost :</label>
                     <input type="text" class="col-md-5 form-control" name="cost" value="<?= @$reseller_didinfo['cost'] ?>"/>
-                </li>        
+                </li>
                  <li class="col-md-8">
                     <label class="col-md-3 no-padding">Increments :</label>
                     <input type="text" class="col-md-5 form-control" name="inc" value="<?= @$reseller_didinfo['inc'] ?>"/>
-                </li>                
+                </li>
 
 
                <!--  <li class="col-md-8">
                     <label class="col-md-3 no-padding">Prorate :</label>
-                    
+
                     <select name="prorate" class="col-md-5 form-control" style="width:170px;" >
                         <option value="1" <?php if (@$reseller_didinfo['prorate'] == "1") {
                         echo "selected='selected'";
@@ -140,19 +140,16 @@
                  <!--<li class="col-md-8">
                     <label class="col-md-3 no-padding">Dial As :</label>
                     <input type="text" class="col-md-5 form-control" name="number" value="<?= @$did['reseller_didinfo'] ?>"/>
-                </li> -->                       
-            </ul>        
+                </li> -->
+            </ul>
 <center>
            <div style="width:100%;float:left;height:50px;margin-top:20px;">
-	 <input type="button" class="btn btn-line-parrot" id='submit' style="margin-left:5px;" name="action" value="<?= isset($did) ? "Save" : "Insert"; ?>" /> 
-            <input type="button" onclick="location.href = '<?= base_url() ?>did/did_list/';" class="btn btn-line-sky margin-x-10" name="action" value="Cancel" /> 
-               
+	 <input type="button" class="btn btn-line-parrot" id='submit' style="margin-left:5px;" name="action" value="<?= isset($did) ? "Save" : "Insert"; ?>" />
+            <input type="button" onclick="location.href = '<?= base_url() ?>did/did_list/';" class="btn btn-line-sky margin-x-10" name="action" value="Cancel" />
+
             </div></center>
         </form>
-       </div>      
-    </section>        
+       </div>
+    </section>
 <!--  </div>
 </div>-->
-
-
-
