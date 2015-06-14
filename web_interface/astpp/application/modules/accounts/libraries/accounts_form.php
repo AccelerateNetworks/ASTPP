@@ -109,7 +109,7 @@ class Accounts_form {
             array('Email Address', 'INPUT', array('name' => 'notify_email', 'size' => '50', 'maxlength' => '80', 'class' => "text field medium"), 'valid_email', 'tOOL TIP', ''),
         );
         $form['button_save'] = array('name' => 'action', 'content' => 'Save', 'value' => 'save', 'type' => 'submit', 'class' => 'btn btn-line-parrot');
-        $form['button_cancel'] = array('name' => 'action', 'content' => 'Cancel', 'value' => 'cancel', 'type' => 'button', 'class' => 'btn btn-line-sky margin-x-10',  'onclick' => 'return redirect_page(\'/accounts/customer_list/\')');
+        $form['button_cancel'] = array('name' => 'action', 'content' => 'Cancel', 'value' => 'cancel', 'type' => 'button', 'class' => 'btn btn-line-sky margin-x-10',  'onclick' => 'return redirect_page(\''.base_url().'/accounts/customer_list/\')');
         return $form;
     }
         function customer_bulk_generate_form(){
