@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$astpp_config = parse_ini_file("/var/lib/astpp/astpp-config.conf");
+$astpp_config = parse_ini_file("/etc/astpp/astpp-config.conf");
 //$config['base_url'] = 'http://192.168.1.:8093/';
 
 $config['base_url'] = $astpp_config['base_url'];

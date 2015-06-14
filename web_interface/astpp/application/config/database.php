@@ -44,7 +44,7 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
-$astpp_config = parse_ini_file("/var/lib/astpp/astpp-config.conf");
+$astpp_config = parse_ini_file("/etc/astpp/astpp-config.conf");
 
 $active_group = 'default';
 $active_record = TRUE;
@@ -63,7 +63,7 @@ $db['default']['char_set'] = 'utf8';
 $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE; 
+$db['default']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

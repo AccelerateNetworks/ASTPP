@@ -198,7 +198,7 @@ class Systems extends CI_Controller {
         $this->session->set_userdata('advance_search', 0);
         $this->session->set_userdata('did_search', "");
     }
-    
+
     // country code =====================================
     function country_list() {
         $data['username'] = $this->session->userdata('user_name');
@@ -227,10 +227,10 @@ class Systems extends CI_Controller {
 
         echo json_encode($json_data);
     }
-    
+
     function country_list_search() {
         $ajax_search = $this->input->post('ajax_search', 0);
-	
+
         if ($this->input->post('advance_search', TRUE) == 1) {
             $this->session->set_userdata('advance_search', $this->input->post('advance_search'));
             $action = $this->input->post();
@@ -247,7 +247,7 @@ class Systems extends CI_Controller {
         $this->session->set_userdata('advance_search', 0);
         $this->session->set_userdata('country_search', "");
     }
-    
+
     function country_add() {
 	$data['username'] = $this->session->userdata('user_name');
         $data['flag'] = 'create';
@@ -266,7 +266,7 @@ class Systems extends CI_Controller {
         $data['form'] = $this->form->build_form($this->system_form->get_country_form_fields(), $edit_data);
         $this->load->view('view_country_add_edit', $data);
     }
-    
+
 
     function country_save() {
 	$add_array = $this->input->post();
@@ -296,7 +296,7 @@ class Systems extends CI_Controller {
             }
         }
     }
-    
+
      function country_remove($id) {
         $this->system_model->remove_country($id);
         $this->session->set_flashdata('astpp_notification', 'Country removed successfully!');
@@ -343,7 +343,7 @@ class Systems extends CI_Controller {
 
     function currency_list_search() {
         $ajax_search = $this->input->post('ajax_search', 0);
-	
+
         if ($this->input->post('advance_search', TRUE) == 1) {
             $this->session->set_userdata('advance_search', $this->input->post('advance_search'));
             $action = $this->input->post();
@@ -379,7 +379,7 @@ class Systems extends CI_Controller {
         $data['form'] = $this->form->build_form($this->system_form->get_currency_form_fields(), $edit_data);
         $this->load->view('view_country_add_edit', $data);
     }
-    
+
 
     function currency_save() {
 	$add_array = $this->input->post();
@@ -409,7 +409,7 @@ class Systems extends CI_Controller {
             }
         }
     }
-    
+
      function currency_remove($id) {
         $this->system_model->remove_currency($id);
         $this->session->set_flashdata('astpp_notification', 'Currency removed successfully!');
@@ -434,7 +434,7 @@ class Systems extends CI_Controller {
     {
 	$add_array=$_POST;
 	if($add_array['backup_name'] != '' && $add_array['path'] != ''){
-	$astpp_config = parse_ini_file("/var/lib/astpp/astpp-config.conf");
+	$astpp_config = parse_ini_file("/etc/astpp/astpp-config.conf");
 // 	$astpp_config = parse_ini_file("/home/html/astpp/astpp-config.conf");
 	$db_name = $astpp_config['dbname'];
 	$db_username = $astpp_config['dbuser'];
@@ -450,8 +450,8 @@ class Systems extends CI_Controller {
 	$run_backup="/usr/bin/mysqldump -all --databases ".$db_name." -u'".$db_username."' -p'".$db_password."' > '$backup_file'";
 // 	echo $run_backup."\n\n";
 	 exec($run_backup,$output,$error);
-	 
-	  if ($do_gzip){ 
+
+	  if ($do_gzip){
 		  $gzip="/usr/bin/gzip";
 		  // Compress file
 		  $run_gzip = $gzip." '$backup_file'";
@@ -463,23 +463,23 @@ class Systems extends CI_Controller {
 // exit;
  		if($error ==0 && $error_zip ==0 )
 		{
-		
+
 		    $this->system_model->backup_insert($add_array);
 		    $this->session->set_flashdata('astpp_errormsg', 'backup added successfully!');
 	  	}
 		elseif($error!=0)
 		{
-					
+
 			$this->session->set_flashdata('astpp_notification', 'An error occur when the system tried to backup of the database. Please check yours system settings for the backup section');
 		}
 		else
 		{
 	   	$this->session->set_flashdata('astpp_notification', 'An error occur when the system tried to compress the backup realized. Please check yours system settings for the backup section!');
-		  
+
 		}
 	  redirect(base_url() . 'systems/database_restore/');
 	  exit;
-	  
+
       }
 
       else{
@@ -487,7 +487,7 @@ class Systems extends CI_Controller {
 	redirect(base_url() . 'systems/database_restore/');
       }
     }
-    
+
     function database_restore() {
         $data['page_title'] = 'Backup Database';
 	$data['form'] = $this->form->build_form($this->system_form->get_backup_database_form_fields(), '');
@@ -516,11 +516,11 @@ class Systems extends CI_Controller {
 	 $result_array=$result->result_array();
 	  if($result->num_rows() > 0)
 	  {
-		    $astpp_config = parse_ini_file("/var/lib/astpp/astpp-config.conf");
+		    $astpp_config = parse_ini_file("/etc/astpp/astpp-config.conf");
 		    $db_name = $astpp_config['dbname'];
 		    $db_username = $astpp_config['dbuser'];
 		    $db_password = $astpp_config['dbpass'];
-		    
+
 		    $path=$result_array[0]['path'];
 		    if(file_exists($path)){
 			  if (substr($path,-3)=='.gz') {
@@ -542,7 +542,7 @@ class Systems extends CI_Controller {
 
 function country_export_xls()
 {
-	echo "developing remaining"; 
+	echo "developing remaining";
 }
 
 function currency_export_xls()
@@ -568,7 +568,7 @@ function currency_export_xls()
 
     function database_download($id='')
     {
-    
+
  	$result = $this->system_model->get_backup_data($id);
  	$result_array=$result->result_array();
  	if($result->num_rows() > 0)
@@ -576,7 +576,7 @@ function currency_export_xls()
 	  $path=$result_array[0]['path'];
 	  $filename = basename($path);
 	  $len = filesize($path);
-	  
+
 	  header("Content-Encoding: binary");
 	  header("Content-Type: application/octet-stream");
 	  header( "content-length: " . $len );
@@ -596,7 +596,7 @@ function currency_export_xls()
     {
 	$data['page_title'] = 'Import Database';
         $this->load->view('view_import_database', $data);
-    
+
     }
    function database_import_file()
     {
@@ -604,29 +604,29 @@ function currency_export_xls()
 	$filename = $_POST['fname'];
 	//print_r($filename);
 	//exit;
-		
+
 	$target_path = $this->config->item('db_upload-file-path');
 	$upload_greeting_file= $_FILES['userfile']['name'];
 	$db_file = explode(".",$upload_greeting_file);
 	if( $db_file[1] == 'csv' || $db_file[1] == 'tar' || $db_file[1] == 'sql')
 		{
-			$target_path = $target_path . basename( $_FILES['userfile']['name']); 
+			$target_path = $target_path . basename( $_FILES['userfile']['name']);
 			move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_path );
 			$this->load->model('system_model');
 			$query = $this->system_model->import_database($filename,$target_path);
 			echo "The file ".  basename( $_FILES['userfile']['name'])." has been uploaded";
 			redirect(base_url() . 'systems/database_restore/');
-			//$this->redirect_notification("Something wrong",'/system/database_restore/");	
-		}		
+			//$this->redirect_notification("Something wrong",'/system/database_restore/");
+		}
 		else
 		{
 			echo "The file ".  basename( $_FILES['userfile']['name'])." Uploaded Fail";
 			redirect(base_url() . 'systems/database_restore/');
-			//$this->redirect_notification("Something wrong",'/system/database_restore/");	
-		
+			//$this->redirect_notification("Something wrong",'/system/database_restore/");
+
 		}
 
-	 	
+
     }
     function database_delete($id)
     {
@@ -637,7 +637,7 @@ function currency_export_xls()
       return true;
     }
     function database_backup_delete_multiple() {
-        
+
         $ids = $this->input->post("selected_ids", true);
         $where = "id IN ($ids)";
         $this->db->where($where);
@@ -646,4 +646,3 @@ function currency_export_xls()
 }
 
 ?>
-  
