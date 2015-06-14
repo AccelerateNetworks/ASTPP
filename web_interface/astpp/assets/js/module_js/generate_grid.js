@@ -1,14 +1,14 @@
 $(document).ready(function() {
     $("#show_search").click(function(){
         $("#search_bar").slideToggle("slow");
-    });  
+    });
     $("#updatebar").click(function(){
         $("#update_bar").slideToggle("slow");
     });
-    $('.checkall').click(function () { 
+    $('.checkall').click(function () {
         $('.chkRefNos').attr('checked', this.checked); //if you want to select/deselect checkboxes use this
     });
-    jQuery("#customer_cdr_from_date").datetimepicker({format:'Y-m-d H:i:s'});		
+    jQuery("#customer_cdr_from_date").datetimepicker({format:'Y-m-d H:i:s'});
     jQuery("#customer_cdr_to_date").datetimepicker({format:'Y-m-d H:i:s'});
     $('.toast-close-button').click(function(){
         $("#toast-container").css("display","none");
@@ -36,7 +36,7 @@ function clickchkbox(chkid){
         if(this.checked == false) {
             $('.checkall').attr('checked', false);
             chk_flg++;
-        } 
+        }
     });
     if(chk_flg == 0){
         $('.checkall').attr('checked', true);
@@ -49,14 +49,14 @@ function post_request_for_search(grid_id,destination,form_id){
     $.ajax({
         type:'POST',
         url: destination,
-        data:$('#'+form_id).serialize(), 
-        success: function(response) { 
+        data:$('#'+form_id).serialize(),
+        success: function(response) {
             $('#'+grid_id).flexOptions({newp:1}).flexReload();
-            document.getElementById("active_search").innerHTML = "(Active...)";   
+            document.getElementById("active_search").innerHTML = "(Active...)";
         }
     });
 }
-function clear_search_request(grid_id,destination){ 
+function clear_search_request(grid_id,destination){
     if(destination == ""){
         destination = build_url("_clearsearchfilter");
     }
@@ -94,13 +94,13 @@ function build_grid_reports(grid_id,destination,collumn_arr,buttons){
 	  nomsg: 'No Records',
 	  procmsg: 'Processing, please wait ...',
 	  pagestat: 'Displaying {from} to {to} of {total} Records',
-	  onSuccess: function(data){ 
+	  onSuccess: function(data){
 	      $('a[rel*=facebox]').facebox({
-		  loadingImage : '/assets/images/loading.gif',
-		  closeImage   : '/assets/images/closelabel.png'
+		  loadingImage : base_url + '/assets/images/loading.gif',
+		  closeImage   : base_url + '/assets/images/closelabel.png'
 	      });
 	  },
-/*	  onError: function(){ 
+/*	  onError: function(){
 	      alert("Request failed");
 	  }*/
       });
@@ -124,13 +124,13 @@ function build_grid(grid_id,destination,collumn_arr,buttons){
         nomsg: 'No Records',
         procmsg: 'Processing, please wait ...',
         pagestat: '{from} - {to} of {total} Records',
-        onSuccess: function(data){ 
+        onSuccess: function(data){
             $('a[rel*=facebox]').facebox({
                 loadingImage : '/assets/images/loading.gif',
                 closeImage   : '/assets/images/closelabel.png'
             });
         },
-/*        onError: function(data){ 
+/*        onError: function(data){
 var col_field = [];
 for (var key in data) {
 col_field.push(data[key]);
@@ -141,7 +141,7 @@ col_field.push(data[key]);
     });
     $("#"+grid_id).addClass("flex_grid");
 }
-  
+
 function build_collumns(collumn_arr){
     var col_field = [];
     var collumn_property = new Array();
@@ -156,12 +156,12 @@ function build_collumns(collumn_arr){
             var col_str =col_field[i];
 	    if(col_str != 'null' && col_str != ''){
             collumn_property = col_str.toString().split(',');
-	    
+
             // 	    alert("{display:"+collumn_property[0]+", name:"+collumn_property[0]+", width:"+collumn_property[1]+" , sortable: 'false', align: 'center'}");
             jsonObj.push({
-                display:collumn_property[0], 
-                name: collumn_property[0], 
-                width: collumn_property[1],  
+                display:collumn_property[0],
+                name: collumn_property[0],
+                width: collumn_property[1],
                 align: 'center'
             });
 	    }
@@ -169,7 +169,7 @@ function build_collumns(collumn_arr){
     }
     return jsonObj;
 }
-  
+
 function build_buttons(buttons_arr){
     var jsonObj = []; //declare object
     if(buttons_arr == ""){
@@ -188,22 +188,22 @@ function build_buttons(buttons_arr){
         if(btn_field[i] !=""){
             var btn_str =btn_field[i];
             button_property = btn_str.toString().split(',');
-            //ASTPP   
-      
-            if(button_property[5] == 'popup'){ 
+            //ASTPP
+
+            if(button_property[5] == 'popup'){
                 jsonObj.push({
-                    name: button_property[0], 
+                    name: button_property[0],
                     bclass: button_property[1],
                     iclass: button_property[2],
-                    btn_url:button_property[4], 
+                    btn_url:button_property[4],
                     onpress: button_action_popup
                 });
             }else{
                 jsonObj.push({
-                    name: button_property[0], 
+                    name: button_property[0],
                     bclass: button_property[1],
                     iclass: button_property[2],
-                    btn_url:button_property[4], 
+                    btn_url:button_property[4],
                     onpress: button_action
                 });
             }
@@ -221,28 +221,28 @@ function redirect_page(url)
     }
 }
 function delete_multiple(btn_url){
-    var result = "";                        
+    var result = "";
     $(".chkRefNos").each( function () {
-        if(this.checked == true) {     
+        if(this.checked == true) {
             result += ",'"+$(this).val()+"'";
-        } 
-    });     
+        }
+    });
     result = result.substr(1);
     // 	alert(result);
     if(result){
         confirm_string = 'Are you sure want to Delete this selected records?';
         var answer = confirm(confirm_string);
         if(answer){
-            $.ajax({ 
+            $.ajax({
                 type: "POST",
                 cache    : false,
-                async    : true,  
+                async    : true,
                 url: btn_url,
                 data: "selected_ids="+result,
-                success: function(data){ 
+                success: function(data){
                     if(data == 1)
                     {
-                        $('.flex_grid').flexOptions({newp:1}).flexReload(); 
+                        $('.flex_grid').flexOptions({newp:1}).flexReload();
                     } else{
                         alert("Proble to delete records");
                     }
@@ -262,30 +262,30 @@ function button_action(t, grid){
     }else{
         window.location = t.btn_url;
     }
-     
+
 }
-function button_action_popup(t, grid){ 
+function button_action_popup(t, grid){
     if(t.name == 'Refresh'){
         $('.flex_grid').flexReload();
     }
     else if(t.name=="DELETE"){
         delete_multiple(t.btn_url);
-    }else{ 
+    }else{
         jQuery.facebox({
             ajax: t.btn_url
         });
     }
 }
-  
+
 function submit_form(form_id){
     $('#error_msg').fadeIn();
     var form = $('#'+form_id);
     $.ajax({
         type:'POST',
         url: form.attr('action'),
-        data:$('#'+form_id).serialize(), 
+        data:$('#'+form_id).serialize(),
         success: function(response) {
-//  	    alert(response); 
+//  	    alert(response);
             var tmp = jQuery.parseJSON(response);
             if(!tmp.SUCCESS){
                $(".error_div").css("display","block");
@@ -303,14 +303,14 @@ function submit_form(form_id){
             return false;
         }
     });
-} 
-function display_astpp_message(validate_ERR,ERR_type){ 
+}
+function display_astpp_message(validate_ERR,ERR_type){
 	if(ERR_type == "notification")
 	{
 	    $("#toast-container_error").css("display","block");
 	    $(".toast-message").html(validate_ERR);
 	    $('.toast-top-right').delay(5000).fadeOut();
-	  
+
 	}else{
 	  $("#toast-container").css("display","block");
 	  $(".toast-message").html(validate_ERR);
